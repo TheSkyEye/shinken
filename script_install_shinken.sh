@@ -1,7 +1,7 @@
 #http://www.samuelpoggioli.fr/shinken-2-procedure-dinstallation/
 #https://debian-fr.org/t/shinken-webui-graphite-statsd/69997/2
 useradd -m shinken
-apt-get install -y python-pycurl python-setuptools python-pip nmap python-setuptools mongodb lsb-release
+apt-get install -y python-pycurl python-setuptools python-pip nmap python-setuptools mongodb python-pymongo lsb-release
 pip install shinken
 /etc/init.d/shinken start
 sudo -E shinken shinken --init
