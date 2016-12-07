@@ -6,10 +6,10 @@ cd pnp4nagios-0.6.24/
 make all
 make fullinstall
 #/etc/httpd/conf.d/pnp4nagios.conf
-sed -i "s|    AuthName "Nagios Access"|    # AuthName "Nagios Access"|" /etc/httpd/conf.d/pnp4nagios.conf
-sed -i "s|    AuthType Basic|    # AuthType Basic|" /etc/httpd/conf.d/pnp4nagios.conf
-sed -i "s|    AuthUserFile /usr/local/nagios/etc/htpasswd.users|    # AuthUserFile /usr/local/nagios/etc/htpasswd.users|" /etc/httpd/conf.d/pnp4nagios.conf
-sed -i "s|    Require valid-user|    # Require valid-user|" /etc/httpd/conf.d/pnp4nagios.conf
+#sed -i "s|    AuthName "Nagios Access"|    # AuthName "Nagios Access"|" /etc/httpd/conf.d/pnp4nagios.conf
+#sed -i "s|    AuthType Basic|    # AuthType Basic|" /etc/httpd/conf.d/pnp4nagios.conf
+#sed -i "s|    AuthUserFile /usr/local/nagios/etc/htpasswd.users|    # AuthUserFile /usr/local/nagios/etc/htpasswd.users|" /etc/httpd/conf.d/pnp4nagios.conf
+#sed -i "s|    Require valid-user|    # Require valid-user|" /etc/httpd/conf.d/pnp4nagios.conf
 cp -a /etc/httpd/conf.d/pnp4nagios.conf /etc/apache2/sites-available/
 a2ensite pnp4nagios
 #Si vous avez l’erreur 403 “You don’t have permission to access /pnp4nagios on this server”, il faut modifier la ligne “Require all denied” par “Require all granted” dans le fichier /etc/apache2/apache2.conf (voir dans les commentaires, merci Romain). Puis
