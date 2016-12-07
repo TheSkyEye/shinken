@@ -1,0 +1,170 @@
+# Define a service to check the disk space of the root partition
+# on the local machine. Warning if < 20% free, critical if
+# < 10% free space on partition.
+ 
+define service{
+use local-service ; Name of service template to use
+host_name localhost
+service_description Root Partition
+check_command check_local_disk!10%!5%!/
+}
+ 
+define service{
+use local-service ; Name of service template to use
+host_name localhost
+service_description Backup Partition
+check_command check_local_disk!10%!5%!/mnt/backup
+}
+ 
+# Define a service to check the number of currently logged in
+# users on the local machine.
+ 
+define service{
+use local-service ; Name of service template to use
+host_name localhost
+service_description Current Users
+check_command check_local_users!2!3
+}
+ 
+# Define a service to check the number of currently running procs
+# on the local machine. Warning if > 250 processes, critical if
+# > 400 processes.
+ 
+define service{
+use local-service ; Name of service template to use
+host_name localhost
+service_description Total Processes
+check_command check_local_procs!250!400!RSZDT
+}
+ 
+# Check memoire avec script check_memory
+# http://blog.nicolargo.com/2008/07/surveiller-la-memoire-de-vos-serveurs-avec-nagios.html
+# -w 5% -c 1%
+ 
+define service{
+use local-service
+host_name localhost
+service_description Memory
+check_command check_mem!10%!5%
+}
+ 
+# Define a service to check the load on the local machine.
+ 
+define service{
+use local-service ; Name of service template to use
+host_name localhost
+service_description Current Load
+check_command check_local_load!5.0,4.0,3.0!10.0,6.0,4.0
+}
+ 
+# Define a service to check the swap usage the local machine.
+# Critical if less than 10% of swap is free, warning if less than 20% is free
+ 
+define service{
+use local-service ; Name of service template to use
+host_name localhost
+service_description Swap Usage
+check_command check_local_swap!20!10
+}
+ 
+# Check RAID (hardware)
+ 
+define service{
+use local-service ; Name of service template to use
+host_name localhost
+service_description RAID1
+check_command check_raid
+}
+[/cce]
+puis les services Web:
+[cce]
+# Define a service to check SSH on the local machine.
+ 
+define service{
+use local-service ; Name of service template to use
+host_name localhost
+service_description SSH
+check_command check_ssh
+#notifications_enabled 0
+}
+ 
+# Varnish process
+# /usr/lib/nagios/plugins/check_procs -w 2:2 -c 1:1024 -C varnishd
+ 
+define service{
+use local-service
+host_name localhost
+service_description Varnish process
+check_command check_local_process!2:2!1:1024!varnishd
+}
+ 
+# Check process
+# /usr/lib/nagios/plugins/check_procs -w 5:5 -c 1:1024 -C nginx
+ 
+define service{
+use local-service
+host_name localhost
+service_description Nginx process
+check_command check_local_process!5:5!1:1024!nginx
+}
+ 
+# Define a service to check Varnish
+ 
+define service{
+use local-service ; Name of service template to use
+host_name localhost
+service_description Varnish access
+check_command check_url!http://localhost/
+}
+ 
+# Define a service to check HTTP on the local machine.
+ 
+define service{
+use local-service ; Name of service template to use
+host_name localhost
+service_description Nginx access
+check_command check_url!http://localhost:8080/
+}
+ 
+# Define a service to check HTTP on the local machine.
+ 
+define service{
+use local-service ; Name of service template to use
+host_name localhost
+service_description URL Blog check
+check_command check_url!http://www.mondomaine.com/
+}
+ 
+# Define a service to check URL
+# http://www.mondomaine.com/googleXXXXXXXX.html
+ 
+define service{
+use local-service
+host_name localhost
+service_description URL Google check file
+check_command check_url!http://www.mondomaine.com/googleXXXXXXXXXX.html
+service_dependencies localhost,HTTP Blog
+}
+ 
+# Define a service to check URL
+# http://blog.nicolargo.com/sitemap.xml.gz
+ 
+define service{
+use local-service
+host_name localhost
+service_description URL Sitemap
+check_command check_url!http://www.mondomaine.com/sitemap.xml.gz
+service_dependencies localhost,HTTP Blog
+}
+ 
+# Define a DDOS detection service
+# http://blog.nicolargo.com/?p=4100
+# Warning: >50 SYN_RECV
+# Critical: >70 SYN_RECV
+ 
+define service{
+use local-service
+host_name localhost
+service_description DDOS detect
+check_command check_ddos!50!70
+}
