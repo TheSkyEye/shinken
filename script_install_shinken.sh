@@ -5,7 +5,7 @@ apt-get install -y build-essential python-pycurl libperl-dev python-setuptools p
 pip install shinken
 /etc/init.d/shinken start
 sudo -E shinken shinken --init
-sudo -E shinken install webui
+#sudo -E shinken install webui
 sudo -E shinken install webui2
 sudo -E shinken install statsd
 sudo -E shinken install nsca
