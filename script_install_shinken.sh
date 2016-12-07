@@ -59,6 +59,7 @@ sudo -E shinken install npcdmod
 sudo -E shinken install mongodb
 sudo -E shinken install mysql
 sed -i "s|    modules|    modules    webui2|" /etc/shinken/brokers/broker-master.cfg
+pip install "pymongo>=3.0.3" requests arrow "bottle==0.12.8"
 /etc/init.d/shinken restart
 service shinken check
 wget --no-check-certificate https://www.monitoring-plugins.org/download/monitoring-plugins-2.1.1.tar.gz
