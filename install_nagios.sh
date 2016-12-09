@@ -1,4 +1,5 @@
-apt-get install apache2 wget rrdtool bsd-mailx librrds-perl libapache2-mod-php5 php5 php-pear php5-gd php5-ldap php5-snmp libperl-dev rrdtool librrds-perl bind9-host dnsutils bind9utils libradius1 qstat radiusclient1 snmp snmpd
+apt-get update && apt-get upgrade -y
+apt-get install apache2 wget rrdtool bsd-mailx librrds-perl libapache2-mod-php5 php5 php-pear php5-gd php5-ldap php5-snmp libperl-dev librrds-perl bind9-host dnsutils bind9utils libradius1 qstat radiusclient1 snmp snmpd
 wget http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-4.2.0.tar.gz
 wget http://nagios-plugins.org/download/nagios-plugins-2.1.2.tar.gz
 useradd nagios
