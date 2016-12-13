@@ -23,3 +23,10 @@ sudo -E shinken install ui-pnp
 sed -i "s|    modules|    modules    webui2,npcdmod|" /etc/shinken/brokers/broker-master.cfg
 /etc/init.d/npcd restart
 /etc/init.d/shinken restart
+# si problème de conecttion :
+#vérifier que les lignes sont bien commenté dans :
+#/etc/apache2/sites-available/pnp4nagios.conf  
+# AuthName "Nagios Access"    
+# AuthType Basic    
+# AuthUserFile /usr/local/nagios/etc/htpasswd.users
+# Require valid-user
